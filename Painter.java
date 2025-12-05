@@ -9,7 +9,11 @@ public class Painter extends JFrame{
   private JButton green = new JButton("Green");
   private JButton clear = new JButton("Clear");
   private JButton erase = new JButton("Eraser");
+  private JButton size = new JButton("Brush Size Smaall");
+  private JButton size2 = new JButton("Brush Size Large");
   private DrawPanel canvas = new DrawPanel();
+  private int small=8;
+  private int large=30;
   
   public Painter(){
     JPanel panel = new JPanel();
@@ -18,25 +22,24 @@ public class Painter extends JFrame{
     panel.add(green);
     panel.add(clear);
     panel.add(erase);
+    panel.add(size);
+    panel.add(size2);
 
     red.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
         canvas.setEraser(false);
-        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.RED);
       }
     });
     blue.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
         canvas.setEraser(false);
-        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.BLUE);
       }
     });
     green.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
         canvas.setEraser(false);
-        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.GREEN);
       }
     });
@@ -48,7 +51,16 @@ public class Painter extends JFrame{
     erase.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
         canvas.setEraser(true);
-        canvas.setBrushSize(30);
+      }
+    });
+    size.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setBrushSize(small);
+      }
+    });
+    size2.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setBrushSize(large);
       }
     });
 
