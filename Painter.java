@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.*;
 
 
@@ -11,6 +12,7 @@ public class Painter extends JFrame{
   private JButton erase = new JButton("Eraser");
   private JButton size = new JButton("Brush Size Smaall");
   private JButton size2 = new JButton("Brush Size Large");
+  private JButton save = new JButton("Save");
   private DrawPanel canvas = new DrawPanel();
   private int small=8;
   private int large=30;
@@ -24,6 +26,7 @@ public class Painter extends JFrame{
     panel.add(erase);
     panel.add(size);
     panel.add(size2);
+    panel.add(save);
 
     red.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
@@ -64,6 +67,17 @@ public class Painter extends JFrame{
       }
     });
 
+    save.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(null);
+        if(option == JFileChooser.APPROVE_OPTION){
+          File file = chooser.getSelectedFile();
+          canvas.save(file.getAbsolutePath());
+        }
+      }
+    });
+
     this.add(canvas, BorderLayout.CENTER);
     this.add(panel, BorderLayout.SOUTH);
   }
@@ -71,7 +85,6 @@ public class Painter extends JFrame{
   public static void main(String[] args){
     Painter paint = new Painter();
     paint.setTitle("Painter");
-    paint.setLocationRelativeTo(null);
     paint.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     paint.setSize(800, 800);
     paint.setVisible(true);

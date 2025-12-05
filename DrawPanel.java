@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class DrawPanel extends JPanel{
@@ -49,19 +53,26 @@ public class DrawPanel extends JPanel{
         repaint();
     }
 
-    // public void mouseDragged(MouseEvent e){
-    //     if(currentStroke!=null){
-    //         currentStroke.addPoint(e.getPoint());
-    //         repaint();
-    //     }
-    // }
-
     public void setEraser(boolean e) {
         erasing = e;
     }
 
     public void setBrushSize(int size){
         brushSize = size;
+    }
+
+    public void save(String filename){
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        paint(g2);
+        g2.dispose();
+        try {
+            File file = new File("myDrawing.png");
+            ImageIO.write(image, "png", file);
+            System.out.println("Saved to " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void paintComponent(Graphics g) {
