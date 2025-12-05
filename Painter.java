@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
@@ -17,7 +18,23 @@ public class Painter extends JFrame{
     panel.add(green);
     panel.add(clear);
     panel.add(erase);
-    
+
+    red.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setCurrentColor(Color.RED);
+      }
+    });
+    blue.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setCurrentColor(Color.BLUE);
+      }
+    });
+    green.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setCurrentColor(Color.GREEN);
+      }
+    });
+
     this.add(canvas, BorderLayout.CENTER);
     this.add(panel, BorderLayout.SOUTH);   
   }
