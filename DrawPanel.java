@@ -6,39 +6,50 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     private Color currentColor = Color.BLUE;
-    private ArrayList<Point> points = new ArrayList<Point>();
+    private ArrayList<Stroke> strokes = new ArrayList<>();
+    private Stroke currentStroke = null;
 
     public DrawPanel(){
         setBackground(Color.WHITE);
 
-        MouseAdapter mouse = new MouseAdapter(){
+        addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent e){
-                points.add(e.getPoint());
+                currentStroke = new Stroke(currentColor);
+                currentStroke.addPoint(e.getPoint());
+                strokes.add(currentStroke);
                 repaint();
             }
+        });
 
+        addMouseMotionListener(new MouseMotionAdapter(){
             public void mouseDragged(MouseEvent e){
-                points.add(e.getPoint());
-                repaint();
+                if(currentStroke!=null){
+                    currentStroke.addPoint(e.getPoint());
+                    repaint();
+                }
             }
-        };
-
-        addMouseListener(mouse);
-        addMouseMotionListener(mouse);
+        });
     }
 
     public void setCurrentColor(Color c){
         currentColor = c;
     }
 
-
+    public void clearCanvas(){
+        strokes.clear();
+        repaint();
+    }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(currentColor);
         
-        for (Point p : points) {
-            g.fillOval(p.x, p.y, 8, 8);
+        for (Stroke s: strokes) {
+            g.setColor(s.color);
+            for(int i=1; i<s.points.size(); i++){
+                Point p1 = s.points.get(i-1);
+                Point p2 = s.points.get(i);
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+            }
         }
     }
 

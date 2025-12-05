@@ -34,6 +34,11 @@ public class Painter extends JFrame{
         canvas.setCurrentColor(Color.GREEN);
       }
     });
+    clear.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.clearCanvas();
+      }
+    });
 
     this.add(canvas, BorderLayout.CENTER);
     this.add(panel, BorderLayout.SOUTH);   
