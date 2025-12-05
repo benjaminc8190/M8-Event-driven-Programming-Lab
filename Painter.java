@@ -21,16 +21,22 @@ public class Painter extends JFrame{
 
     red.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setEraser(false);
+        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.RED);
       }
     });
     blue.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setEraser(false);
+        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.BLUE);
       }
     });
     green.addActionListener(new ActionListener(){
       public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setEraser(false);
+        canvas.setBrushSize(8);
         canvas.setCurrentColor(Color.GREEN);
       }
     });
@@ -39,9 +45,15 @@ public class Painter extends JFrame{
         canvas.clearCanvas();
       }
     });
+    erase.addActionListener(new ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent e){
+        canvas.setEraser(true);
+        canvas.setBrushSize(30);
+      }
+    });
 
     this.add(canvas, BorderLayout.CENTER);
-    this.add(panel, BorderLayout.SOUTH);   
+    this.add(panel, BorderLayout.SOUTH);
   }
   
   public static void main(String[] args){
@@ -49,7 +61,7 @@ public class Painter extends JFrame{
     paint.setTitle("Painter");
     paint.setLocationRelativeTo(null);
     paint.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    paint.setSize(500, 500);
+    paint.setSize(800, 800);
     paint.setVisible(true);
   }
 }
