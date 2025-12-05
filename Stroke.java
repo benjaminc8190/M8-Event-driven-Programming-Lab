@@ -1,3 +1,11 @@
+/*
+ * CSCI 185 M03
+ * Fall 2025
+ * M8: Event-driven Programming Lab (*BONUS*)
+ * Authors: Benjamin Chau
+ * Date: 12/05/2025
+ */
+
 
 import java.awt.*;
 import java.util.ArrayList;
